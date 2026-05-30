@@ -188,7 +188,7 @@ const Contact = () => {
                   </div>
 
                   <div className="flex flex-col gap-3">
-                    <label className="text-sm font-medium" style={{ color: 'var(--text-secondary)' }}>Services Required (Select multiple if needed)</label>
+                    <label className="text-sm font-medium" style={{ color: 'var(--text-secondary)' }}>Services Required</label>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       {SERVICES_LIST.map((service) => {
                         const isSelected = selectedServices.includes(service.label);
