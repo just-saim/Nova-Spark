@@ -20,7 +20,7 @@ const CONTACT_INFO = [
     icon: MapPin,
     title: 'Visit Us',
     details: 'NovaSpark Creative Studio',
-    sub: 'Andheri West, Mumbai, 400053'
+    sub: 'Bareilly, Uttar Pradesh'
   }
 ];
 
