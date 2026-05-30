@@ -109,3 +109,83 @@ code {
   padding: 4px 8px;
   background: var(--code-bg);
 }
+
+/* ──────────────────────────────────────────────────
+   ADMIN PANEL STYLES
+   ────────────────────────────────────────────────── */
+
+.admin-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.admin-table th {
+  background: var(--bg-tertiary);
+  padding: 16px 24px;
+  font-size: 13px;
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  text-align: left;
+  white-space: nowrap;
+}
+
+.admin-table td {
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--border);
+  font-size: 14px;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+.admin-table tr:hover td {
+  background: var(--bg-tertiary);
+  cursor: pointer;
+}
+
+.status-badge {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: capitalize;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.status-new {
+  background: #FF4D0020;
+  color: #FF4D00;
+}
+
+.status-contacted {
+  background: #4D9FFF20;
+  color: #4D9FFF;
+}
+
+.status-in-progress {
+  background: #FFB84D20;
+  color: #FFB84D;
+}
+
+.status-won {
+  background: #4DFFB820;
+  color: #00CC88;
+}
+
+.status-lost {
+  background: #FF4D4D20;
+  color: #FF4D4D;
+}
