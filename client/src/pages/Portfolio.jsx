@@ -177,7 +177,7 @@ const Portfolio = () => {
       </section>
 
       {/* Filter Bar */}
-      <div className="sticky top-20 z-40 py-4 border-b" style={{ background: 'var(--bg-primary)', borderColor: 'var(--border)' }}>
+      <div className="sticky top-[57px] z-40 py-4 border-b" style={{ background: 'var(--bg-primary)', borderColor: 'var(--border)', transform: 'translate3d(0,0,0)' }}>
         <div className="container flex gap-2 overflow-x-auto pb-1">
           {CATEGORIES.map((cat) => (
             <motion.button
