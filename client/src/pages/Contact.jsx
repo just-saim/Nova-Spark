@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
-import { Mail, Phone, MapPin, Send, MessageSquare, ArrowRight } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, MessageSquare, ArrowRight, CheckCircle } from 'lucide-react';
+import { toast } from 'react-hot-toast';
+import api from '../api';
 
 const CONTACT_INFO = [
   {
@@ -24,26 +26,60 @@ const CONTACT_INFO = [
   }
 ];
 
+const SERVICES_LIST = [
+  { value: 'branding', label: 'Branding & Design' },
+  { value: 'social_media', label: 'Social Media Marketing' },
+  { value: 'web', label: 'Website Development' },
+  { value: 'photography', label: 'Photography' },
+  { value: 'videography', label: 'Videography & Editing' },
+  { value: 'advertising', label: 'Paid Advertising' },
+  { value: 'other', label: 'Other' },
+];
+
 const Contact = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    service: '',
     message: ''
   });
+  const [selectedServices, setSelectedServices] = useState([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    if (selectedServices.length === 0) {
+      toast.error('Please select at least one service');
+      return;
+    }
+    
     setIsSubmitting(true);
-    // Simulate API call
-    setTimeout(() => {
+    try {
+      await api.post('/leads', {
+        name: formData.name,
+        email: formData.email,
+        service: selectedServices.join(', '),
+        description: formData.message
+      });
       setIsSubmitting(false);
       setSubmitted(true);
-      setFormData({ name: '', email: '', service: '', message: '' });
+      setFormData({ name: '', email: '', message: '' });
+      setSelectedServices([]);
+      toast.success('Message sent successfully!');
       setTimeout(() => setSubmitted(false), 5000);
-    }, 1500);
+    } catch (err) {
+      setIsSubmitting(false);
+      console.error(err);
+      toast.error('Failed to send message. Please try again.');
+    }
+  };
+
+  const handleServiceToggle = (serviceLabel) => {
+    if (selectedServices.includes(serviceLabel)) {
+      setSelectedServices(selectedServices.filter(s => s !== serviceLabel));
+    } else {
+      setSelectedServices([...selectedServices, serviceLabel]);
+    }
   };
 
   const handleChange = (e) => {
@@ -151,23 +187,37 @@ const Contact = () => {
                     </div>
                   </div>
 
-                  <div className="flex flex-col gap-2">
-                    <label className="text-sm font-medium" style={{ color: 'var(--text-secondary)' }}>Service Required</label>
-                    <select 
-                      name="service"
-                      value={formData.service}
-                      onChange={handleChange}
-                      required
-                      className="w-full p-4 rounded-xl outline-none transition-all duration-300 appearance-none"
-                      style={{ background: 'var(--bg-primary)', border: '1px solid var(--border)', color: 'var(--text-primary)' }}
-                    >
-                      <option value="" disabled>Select a service...</option>
-                      <option value="branding">Branding & Design</option>
-                      <option value="web">Website Development</option>
-                      <option value="marketing">Digital Marketing</option>
-                      <option value="photo_video">Photography & Videography</option>
-                      <option value="other">Other</option>
-                    </select>
+                  <div className="flex flex-col gap-3">
+                    <label className="text-sm font-medium" style={{ color: 'var(--text-secondary)' }}>Services Required (Select multiple if needed)</label>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      {SERVICES_LIST.map((service) => {
+                        const isSelected = selectedServices.includes(service.label);
+                        return (
+                          <div
+                            key={service.value}
+                            onClick={() => handleServiceToggle(service.label)}
+                            className="flex items-center gap-3 p-4 rounded-xl cursor-pointer border transition-all duration-300 select-none hover:border-[var(--accent-primary)]"
+                            style={{
+                              background: isSelected ? 'var(--accent-glow)' : 'var(--bg-primary)',
+                              borderColor: isSelected ? 'var(--accent-primary)' : 'var(--border)',
+                              boxShadow: isSelected ? '0 0 15px var(--accent-glow)' : 'none'
+                            }}
+                          >
+                            <div className="w-5 h-5 rounded-md flex items-center justify-center border transition-colors flex-shrink-0"
+                              style={{
+                                background: isSelected ? 'var(--accent-primary)' : 'transparent',
+                                borderColor: isSelected ? 'var(--accent-primary)' : 'var(--text-muted)'
+                              }}
+                            >
+                              {isSelected && <CheckCircle size={14} className="text-white" />}
+                            </div>
+                            <span className="text-sm font-medium" style={{ color: isSelected ? 'var(--text-primary)' : 'var(--text-secondary)' }}>
+                              {service.label}
+                            </span>
+                          </div>
+                        );
+                      })}
+                    </div>
                   </div>
 
                   <div className="flex flex-col gap-2">
