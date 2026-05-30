@@ -7,13 +7,13 @@ const CONTACT_INFO = [
   {
     icon: Mail,
     title: 'Email Us',
-    details: 'hello@novaspark.com',
+    details: 'justsaim07@gmail.com',
     sub: 'We usually reply within 24 hours.'
   },
   {
     icon: Phone,
     title: 'Call Us',
-    details: '+91 98765 43210',
+    details: '+91 90273 80030',
     sub: 'Mon-Fri from 9am to 6pm.'
   },
   {

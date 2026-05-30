@@ -56,10 +56,10 @@ const TIMELINE = [
 
 const TEAM = [
   {
-    name: 'Saim Khan',
+    name: 'Mohd Sameer Ahmad',
     role: 'Founder & Creative Director',
     bio: 'I see vision where others only see problems. Igniting brands has been my obsession for over 5 years. I pour my heart into every project.',
-    initials: 'SK',
+    initials: 'MSA',
     color: '#FF4D00',
     tags: ['Strategy', 'Branding', 'Direction']
   },
@@ -512,10 +512,10 @@ const About = () => {
                   <div className="flex items-center gap-4">
                     <div className="w-12 h-12 rounded-full flex items-center justify-center font-bold text-white"
                       style={{ background: 'var(--accent-primary)' }}>
-                      SK
+                      MSA
                     </div>
                     <div>
-                      <p className="font-semibold" style={{ color: 'var(--text-primary)' }}>Saim Khan</p>
+                      <p className="font-semibold" style={{ color: 'var(--text-primary)' }}>Mohd Sameer Ahmad</p>
                       <p className="text-sm" style={{ color: 'var(--text-muted)' }}>Founder, NovaSpark Creative Agency</p>
                     </div>
                   </div>
